@@ -1,0 +1,87 @@
+.background {
+  background: rgb(75,25,65);
+  min-height: 100%;
+}
+
+.hero-content {
+  position: relative;
+  min-height: 600px;
+  background: transparent url(../assets/images/bloc_jams_bg.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+.hero-content .hero-title {
+  position: absolute;
+  top: 40%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  text-shadow: 2px 2px 2px rgb(58,23,63);
+}
+
+.arrow {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  opacity: 1;
+  transition: opacity ease-in-out 0.5s;
+
+  left: 50%;
+  transform: translateX(-50%) rotateZ(45deg);
+  border-bottom-right-radius: 5px;
+  border-bottom: solid 7px;
+  border-right: solid 7px;
+  border-color: rgba(255,50,150,0.5);
+
+  animation-duration: 0.55s;
+  animation-name: float;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes float {
+  from {
+    top: -50px;
+  }
+  to {
+    top: -30px;
+  }
+}
+
+.selling-points {
+  position: relative;
+}
+
+.point {
+  position: relative;
+  padding: 2rem;
+  text-align: center;
+  opacity: 0;
+  -webkit-transform: scaleX(0.9);
+     -moz-transform: scaleX(0.9);
+          transform: scaleX(0.9);
+  -webkit-transition: all 0.25s  ease-in-out;
+     -moz-transition: all 0.25s  ease-in-out;
+          transition: all 0.25s  ease-in-out;
+  -webkit-transition-delay: 0.2s;
+     -moz-transition-delay: 0.2s;
+          transition-delay: 0.2s;
+}
+
+.point .point-title {
+  font-size: 1.25rem;
+}
+
+.ion-music-note,
+.ion-radio-waves,
+.ion-iphone {
+  color: rgb(233,50,117);
+  font-size: 5rem;
+}

@@ -1,0 +1,246 @@
+.background {
+  background: url(../assets/images/blurred_backgrounds/blur_bg_3.jpg) no-repeat fixed center center;
+  background-size: cover;
+  min-height: 100%;
+}
+
+.loading {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 100px;
+}
+
+.loading::before {
+  content: " ";
+  display: block;
+  position: relative;
+  margin: auto;
+  top: 50%;
+  width: 5rem;
+  height: 2.5rem;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  border: 0.75rem solid rgba(0,0,0,0.5);
+  border-top: none;
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  transform-origin: 50% 0;
+  animation-timing-function: cubic-bezier(0.8,0.5,0.5,0.3);
+}
+
+@keyframes spin {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.album-view {
+  padding-bottom: 200px;
+}
+
+.album-cover-art {
+  position: relative;
+  left: 20%;
+  margin-top: 1rem;
+  width: 60%;
+}
+
+.album-view-details {
+  position: relative;
+  top: 1.5rem;
+  padding: 1rem;
+}
+
+.album-view-details .album-view-title {
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.album-view-details .album-view-artist {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.album-view-details .album-view-release-info {
+  font-weight: 300;
+  font-size: 0.75rem;
+}
+
+.album-view-song-list {
+  width: 90%;
+  margin: 1.5rem auto;
+  font-weight: 300;
+  font-size: 0.75rem;
+  border-collapse: collapse;
+  cursor: default;
+}
+
+.album-view-song-list thead {
+  border-bottom: 2px solid rgba(255,255,255,0.5);
+  font-weight: 600;
+  text-align: center;
+}
+
+.album-view-song-item {
+  height: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  transition: background-color ease 0.15s;
+}
+
+.album-view-song-item:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+
+.album-view-song-list thead .song-item-number {
+  width: 5%;
+  min-width: 36px;
+}
+
+.album-view-song-item .song-item-number .album-song-button {
+  display: none;
+}
+
+.album-view-song-item:hover .song-item-number .album-song-button.ion-play {
+  display: block;
+}
+
+.album-view-song-item.playing .song-item-number .album-song-button.ion-play {
+  display: none;
+}
+
+.album-view-song-item.playing .song-item-number .album-song-button.ion-pause {
+  display: block;
+}
+
+.album-view-song-item .song-item-number {
+  text-align: center;
+}
+
+.album-view-song-item .song-item-number::before {
+  content: attr(data-song-number);
+  /*text-align: left;*/
+}
+
+.album-view-song-item.playing .song-item-number::before,
+.album-view-song-item:hover .song-item-number::before {
+  content: '';
+}
+
+.album-view-song-list thead .song-item-title {
+  width: 75%;
+}
+
+.album-view-song-list thead .song-item-duration {
+  width: 10%;
+  padding-right: 10px;
+}
+
+.album-view-song-list thead .song-item-play-count {
+  width: 10%;
+}
+
+.album-view-song-item .song-item-title {
+  position: relative;
+}
+
+.album-song-button {
+  text-align: center;
+  text-indent: 1px;
+  font-size: 14px;
+  background-color: white;
+  color: rgb(210, 40, 123);
+  border-radius: 50% 50%;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+}
+
+.album-song-button:hover {
+  cursor: pointer;
+  background-color: rgb(210, 40, 123);
+  color: white;
+}
+
+
+.playing .sound-bars {
+  display: block;
+}
+
+.sound-bars {
+  display: none;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin: 0 15px;
+  right: 0;
+  transform: rotateZ(180deg) translateY(75%);
+}
+
+.sound-bars .bar {
+  padding: 0;
+  margin: 1px;
+  float: left;
+  width: calc(25% - 2px);
+  bottom: 0px;
+  background-color: rgba(233,50,117,0.75);
+  animation-name: growUp;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(1,0.2,0.3,0);
+}
+
+.bar1 {
+  animation-duration: 0.85s;
+  animation-delay: -0.7s;
+}
+.bar2 {
+  animation-duration: 0.7s;
+  animation-delay: -1s;
+}
+.bar3 {
+  animation-duration: 0.8s;
+  animation-delay: -0.5s;
+}
+.bar4 {
+  animation-duration: 0.75s;
+  animation-delay: 0s;
+}
+
+@keyframes growUp {
+  from {
+    height: 15%;
+  }
+  to {
+    height: 90%;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 320px) {
+  .album-view-song-list {
+    position: relative;
+    top: 1rem;
+    width: 80%;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 640px) and (min-width: 320px) {
+  .album-view-details {
+    text-align: center;
+  }
+
+  .album-view {
+    padding-bottom: 150px;
+  }
+
+  .album-view-title {
+    margin-top: 0;
+  }
+}

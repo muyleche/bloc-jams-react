@@ -1,33 +1,63 @@
 import React, { Component } from 'react';
-//import './styles/album.css';
-import ALBUMS from './data/album_data';
+import './styles/album.css';
+import * as utils from './scripts/utilities';
+import albumData from './data/album_data';
+import SongList from './SongList';
+import PlayerBar from './PlayerBar';
 
 class Album extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { currentlyPlaying: null, album: null };
+  }
+  
   render() {
-    let album = ALBUMS[parseInt(this.props.location.pathname.split('/').pop(),10)];
-    console.log();
     return (
-      <div className="">
-        <img alt="Album Cover Art" />
-        <h1>{album.title}</h1>
-        <h2>{album.artist}</h2>
-        <table>
-          <thead>
-            <tr></tr>
-          </thead>
-          <tbody>
-            {album.songs.map((song, index) => (<Song key={index} songNumber={index+1}/>))}
-          </tbody>
-        </table>
+      !this.state.album ?
+      <div className="loading"></div>
+      :
+      <div className="album">
+        <main className="album-view container narrow">
+          <section className="clearfix">
+            <div className="column half">
+              <img src={require(`./${this.state.album.albumArtUrl}`)} className="album-cover-art" alt="" />
+            </div>
+            <div className="album-view-details column half">
+              <h2 className="album-view-title">{this.state.album.title}</h2>
+              <h3 className="album-view-artist">{this.state.album.artist}</h3>
+              <h5 className="album-view-release-info">{`${this.state.album.year} ${this.state.album.label}`}</h5>
+            </div>
+          </section>
+          <SongList clickHandler={this.playSong} songs={this.state.album.songs} currentlyPlaying={this.state.currentlyPlaying}/>
+        </main>
+        <PlayerBar currentlyPlaying={this.state.currentlyPlaying} artist={this.state.album.artist}/>
       </div>
     );
   }
-}
 
-class Song extends Component {
-  render() {
-    return (<tr key={this.props.songNumber}><td>Song</td></tr>);
+  playSong = (event) => {
+    // only do stuff if you clicked in the album-song-button
+    if (event.target.classList.contains('album-song-button')) {
+      let songIndex = utils.getFirstParentByClassName(event.target,'album-view-song-item').dataset.songIndex,
+          thisSong = this.state.album.songs[parseInt(songIndex,10)];
+
+      // increment playCount and update currentlyPlaying song.
+      if (thisSong !== this.state.currentlyPlaying) {
+        thisSong.playCount++;
+      }
+      this.setState(prevState => ({ currentlyPlaying: thisSong === prevState.currentlyPlaying ? null : thisSong }));
+
+      if (this.state.currentlyPlaying) console.log(`Now playing '${this.state.currentlyPlaying.title}'.`);
+    }
+
+  }
+
+  componentDidMount() {
+    // wait 0.5 second just to give the illusion of loading server data.
+    setInterval(() => {this.setState({
+      album: albumData[parseInt(this.props.match.params.id,10)]
+    });}, 500);
   }
 }
 
-export { Album, Song };
+export default Album;

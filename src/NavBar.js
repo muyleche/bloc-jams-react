@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import {
   Link
 } from 'react-router-dom';
+import './styles/main.css';
+import logo from "./assets/images/bloc_jams_logo.png";
 
 class NavBar extends Component {
   render() {
     return (
-      <div className="navbar">
+      <nav className="navbar">
         <Link to="/" className="logo">
-          <img src="src/assets/images/bloc_jams_logo.png"
-                alt="bloc jams logo" />
+          <img src={logo} alt="bloc jams logo" />
         </Link>
         <div className="links-container">
           <Link to="/collections"
                 className="navbar-link">
-            collection
+            collections
           </Link>
         </div>
-      </div>
+      </nav>
     );
   }
 }

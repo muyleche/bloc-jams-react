@@ -1,0 +1,60 @@
+.background {
+  background: url(../assets/images/blurred_backgrounds/blur_bg_2.jpg) no-repeat fixed center center;
+  background-size: cover;
+  min-height: 100%;
+}
+
+.album-covers {
+  position: relative;
+}
+
+
+.collection-album-container {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 10px 30px;
+}
+
+.collection-album-container .image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-album-container .image-container .label {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  padding: 20px 10px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.5);
+  bottom: -30px;
+  opacity: 0;
+  transition: bottom ease-out 0.3s, opacity ease 0.5s;
+}
+
+.collection-album-container .image-container:hover .label {
+  bottom: 0;
+  opacity: 1;
+}
+
+.collection-album-container .caption {
+  margin-top: 5px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.collection-album-container > a {
+  text-decoration: none;
+}
+
+.collection-album-container .album-name {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: white;
+}
+
+.collection-album-container img {
+  width: 100%;
+}
