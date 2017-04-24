@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 
 class AlbumThumbnail extends Component {
   render() {
+    let album = this.props.album;
     return (
       <div className="collection-album-container column fourth">
        <Link to={`album/${this.props.index}`}>
          <div className="image-container">
-            <img src={require(`./${this.props.albumArtUrl}`)} alt="Album Cover Art" />
-            <div className="label">  {this.props.songs.length}   songs</div>
+            <img src={require(`./${album.albumArtUrl}`)} alt="Album Cover Art" />
+            <div className="label">  {album.songs.length}   songs</div>
          </div>
          <p className="caption">
-           <span className="album-name">  {this.props.title}  </span>
-           <br/>  {this.props.artist}
+           <span className="album-name">  {album.title}  </span>
+           <br/>  {album.artist}
          </p>
        </Link>
      </div>

@@ -18,10 +18,7 @@ class Collection extends Component {
         <section className="album-covers container clearfix">
           {this.state.albums.map((album, index) => (
             <AlbumThumbnail key={index}
-              albumArtUrl={album.albumArtUrl}
-              title={album.title}
-              artist={album.artist}
-              songs={album.songs}
+              album={album}
               index={index}/>
           ))}
         </section>
@@ -29,11 +26,9 @@ class Collection extends Component {
     );
   }
   componentDidMount() {
-    // wait 0.5 seconds just to give the illusion of loading server data.
-    setInterval(() => {this.setState({
+    this.setState({
       albums: albumData
-    });}, 500);
-    console.log(this.state);
+    });
   }
 }
 

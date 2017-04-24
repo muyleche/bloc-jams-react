@@ -39,6 +39,7 @@
 .player-bar .control-group {
   display: table-cell;
   vertical-align: middle;
+  position: relative;
 }
 
 .player-bar .main-controls {
@@ -92,69 +93,43 @@
   font-size: 0.8rem;
 }
 
-.seek-control .current-time {
+.seek-control .current-time,
+.seek-control .total-time {
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
 }
 
 .seek-control .total-time {
-  position: absolute;
   right: 0;
-  top: 0.5rem;
 }
 
-.seek-bar {
-  height: 0.25rem;
-  background-color: rgba(255,255,255,0.3);
-  border-radius: 2px;
-  position: relative;
-  cursor: pointer;
+#seek-bar {
+  width: 100%;
 }
 
-.seek-bar .fill {
-  background-color: white;
-  width: 36%;
-  height: 0.25rem;
-  border-radius: 2px;
+.player-bar  .control-group.volume {
+  width: 100%;
+  text-align: center;
 }
 
-.seek-bar .thumb {
+#volume {
+  width: 50%;
+  margin-left: 1rem;
+}
+
+.player-bar .volume-number {
   position: absolute;
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: white;
-  left: 36%;
   top: 50%;
-  margin-left: -0.25rem;
-  margin-top: -0.25rem;
-  border-radius: 50%;
-  cursor: pointer;
-  -webkit-transition: all 100ms ease-in-out;
-     -moz-transition: all 100ms ease-in-out;
-          transition: all 100ms ease-in-out;
-}
-
-.seek-bar:hover .thumb {
-  width: 1.1rem;
-  height: 1.1rem;
-  margin-top: -0.5rem;
-  margin-left: -0.5rem;
-}
-
-.player-bar .volume {
-  width: 25%;
-  text-align: right;
+  width: 100%;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .player-bar .volume .icon {
   font-size: 1.1rem;
   display: inline-block;
-  vertical-align: middle;
-}
-
-.player-bar .volume .seek-bar {
-  display: inline-block;
-  width: 5.75rem;
+  margin-left: 3px;
   vertical-align: middle;
 }
 

@@ -5,7 +5,7 @@ const ALBUMS = [{
   year: "1881",
   albumArtUrl: "assets/images/album_covers/01.png",
   songs: [
-    { title: "Blue", duration: "4:26", playCount: 5 },
+    { title: "Blue", duration: "4:26", playCount: 5, file: 'src/assets/music/01 Gorecki_ Symphony No. 3, _Symphony of Sorrowful Songs__ I. Lento - Sostenuto tranquillo ma cantabile.mp3', fileType: 'audio/mp3' },
     { title: "Green", duration: "3:14", playCount: 11 },
     { title: "Red", duration: "5:01", playCount: 1 },
     { title: "Pink", duration: "3:21", playCount: 7 },

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles/album.css';
-import * as utils from './scripts/utilities';
 import albumData from './data/album_data';
+import * as utils from './scripts/utilities';
 import SongList from './SongList';
 import PlayerBar from './PlayerBar';
 
@@ -10,7 +10,7 @@ class Album extends Component {
     super(props);
     this.state = { currentlyPlaying: null, album: null };
   }
-  
+
   render() {
     return (
       !this.state.album ?
@@ -30,7 +30,7 @@ class Album extends Component {
           </section>
           <SongList clickHandler={this.playSong} songs={this.state.album.songs} currentlyPlaying={this.state.currentlyPlaying}/>
         </main>
-        <PlayerBar currentlyPlaying={this.state.currentlyPlaying} artist={this.state.album.artist}/>
+        <PlayerBar songs={this.state.album.songs} currentlyPlaying={this.state.currentlyPlaying} artist={this.state.album.artist}/>
       </div>
     );
   }
@@ -51,12 +51,10 @@ class Album extends Component {
     }
 
   }
-
   componentDidMount() {
-    // wait 0.5 second just to give the illusion of loading server data.
-    setInterval(() => {this.setState({
+    this.setState({
       album: albumData[parseInt(this.props.match.params.id,10)]
-    });}, 500);
+    });
   }
 }
 
