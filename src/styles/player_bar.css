@@ -48,6 +48,26 @@
   padding-right: 1rem;
 }
 
+.player-bar .main-controls .button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.player-bar .main-controls button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.player-bar .main-controls button:focus {
+  outline: none;
+}
+
+.player-bar .main-controls button:hover {
+  color: darkgray;
+  cursor: pointer;
+}
+
 .player-bar .main-controls .previous {
   margin-right: 16.5%;
 }
@@ -56,7 +76,6 @@
   margin-right: 15%;
   font-size: 1.6rem;
 }
-
 
 .player-bar .currently-playing {
   width: 50%;

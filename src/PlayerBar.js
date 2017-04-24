@@ -42,15 +42,11 @@ class PlayerBar extends Component {
         </audio>
         <div className="container">
           <div className="control-group main-controls">
-            <a className="previous" href="#">
-              <span className="ion-skip-backward"></span>
-            </a>
-            <a className="play-pause" href="#">
-              <span className="ion-play"></span>
-            </a>
-            <a className="next" href="#">
-              <span className="ion-skip-forward"></span>
-            </a>
+            <div className="button-group">
+              <button className="previous ion-skip-backward"></button>
+              <button className="play-pause ion-play"></button>
+              <button className="next ion-skip-forward"></button>
+            </div>
           </div>
           <div className="control-group currently-playing">
             <h2 className="song-name">{title}</h2>
