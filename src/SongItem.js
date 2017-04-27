@@ -6,7 +6,7 @@ class SongItem extends Component {
       <tr className={"album-view-song-item"+(this.props.playing ? ' playing' : "")} data-song-index={this.props.songIndex}>
         <td className="song-item-number" data-song-number={this.props.songNumber}>
           <a className="album-song-button ion-play"></a>
-          <a className="album-song-button ion-pause"></a>
+          <a className="album-song-button ion-stop"></a>
         </td>
         <td className="song-item-title">
           {this.props.title}

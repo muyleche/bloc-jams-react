@@ -5,8 +5,8 @@
   right: 0;
   background-color: rgba(255,255,255,0.3);
   z-index: 100;
-  transition: opacity 0s ease-out,
-              height 0s ease-out;
+  transition: opacity 0.3s ease-out,
+              height 0.3s ease-out;
   opacity: 0;
   height: 0;
 }
@@ -14,7 +14,6 @@
 .player-bar.active {
   height: 200px;
   opacity: 1;
-  transition-duration: 0.5s;
 }
 
 .player-bar a {

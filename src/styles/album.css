@@ -114,7 +114,8 @@
   display: none;
 }
 
-.album-view-song-item.playing .song-item-number .album-song-button.ion-pause {
+.album-view-song-item.playing .song-item-number .album-song-button.ion-stop {
+  padding-right: 2px;
   display: block;
 }
 

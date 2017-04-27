@@ -6,23 +6,28 @@ import plyr from './../node_modules/plyr/dist/plyr';
 class PlayerBar extends Component {
   constructor(props) {
     super(props);
-    plyr.setup('.player');
-    this.state = { volume: 50, position: 0 };
-    console.log(plyr.setup('.player'));
-    // this.player.source({
-    //   type: 'audio',
-    //   sources: this.props.songs
-    // });
+    this.state = { volume: 50, position: 0, playing: !!this.props.currentlyPlaying.title  };
   }
   handleChange = (event) => {
     let newState, classes = event.target.className;
     switch (true) {
+      case(/play-pause/.test(classes)): {
+        this.player.togglePlay();
+        console.log('Pressed play/pause.');
+        newState = { playing: !this.state.playing };
+        console.log('player ready: ',this.player.isReady());
+        console.log('position: ', this.player.getCurrentTime());
+        console.log('volume: ', this.player.getVolume());
+        break;
+      }
       case (/volume/.test(classes)) : {
         newState = { 'volume': event.target.value };
+        this.player.setVolume(newState.volume/10);
         break;
       }
       case (/seek-bar/.test(classes)): {
         newState = { 'position': event.target.value };
+        this.player.seek(newState.position);
         break;
       }
       default: {
@@ -31,21 +36,22 @@ class PlayerBar extends Component {
     }
     this.setState(newState);
   }
+  componentDidMount() {
+    this.player = plyr.setup('.audio-player',{})[0];
+    this.player.setVolume(this.state.volume/10);
+  }
   render() {
     let {title, artist, duration} = Object.assign({artist: this.props.artist},this.props.currentlyPlaying),
         seconds = (duration ? parseInt(duration.replace(/.*:/,''),10) : 0)
                   +(duration ? parseInt(duration.replace(/:.*/,''),10) : 0)*60;
     return (
-      <section className={"player-bar" + (this.props.currentlyPlaying ? " active" : "")}>
-        <audio className="player">
-          <source src={require('./assets/music/01 Gorecki_ Symphony No. 3, _Symphony of Sorrowful Songs__ I. Lento - Sostenuto tranquillo ma cantabile.mp3')}  type="audio/mp3"></source>
-        </audio>
+      <section className={"player-bar" + (this.props.currentlyPlaying.title  ? " active" : "")}>
         <div className="container">
           <div className="control-group main-controls">
             <div className="button-group">
-              <button className="previous ion-skip-backward"></button>
-              <button className="play-pause ion-play"></button>
-              <button className="next ion-skip-forward"></button>
+              <button className="previous ion-skip-backward" onClick={this.handleChange}></button>
+              <button className="play-pause ion-play" onClick={this.handleChange}></button>
+              <button className="next ion-skip-forward" onClick={this.handleChange}></button>
             </div>
           </div>
           <div className="control-group currently-playing">
@@ -66,6 +72,9 @@ class PlayerBar extends Component {
             </div>
           </div>
         </div>
+        <audio className="audio-player">
+          <source src={this.props.currentlyPlaying.file && require(this.props.currentlyPlaying.file)} type={this.props.currentlyPlaying.fileType}></source>
+        </audio>
       </section>
     );
   }

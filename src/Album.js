@@ -8,7 +8,7 @@ import PlayerBar from './PlayerBar';
 class Album extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentlyPlaying: null, album: null };
+    this.state = { currentlyPlaying: {}, album: null };
   }
 
   render() {
@@ -45,9 +45,9 @@ class Album extends Component {
       if (thisSong !== this.state.currentlyPlaying) {
         thisSong.playCount++;
       }
-      this.setState(prevState => ({ currentlyPlaying: thisSong === prevState.currentlyPlaying ? null : thisSong }));
+      this.setState(prevState => ({ currentlyPlaying: thisSong === prevState.currentlyPlaying ? {} : thisSong }));
 
-      if (this.state.currentlyPlaying) console.log(`Now playing '${this.state.currentlyPlaying.title}'.`);
+      if (this.state.currentlyPlaying.title) console.log(`Now playing '${this.state.currentlyPlaying.title}'.`);
     }
 
   }
