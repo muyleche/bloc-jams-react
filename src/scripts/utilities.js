@@ -41,4 +41,14 @@ function getFirstParentByClassName (element, className) {
   return element;
 }
 
-export {getHtmlQueryAsJson, getFirstParentByClassName, numberPad, forEach};
+
+function durationStringToSeconds(str) {
+  return (str ? parseInt(str.split(':')[0],10) : 0)*60
+        +(str ? parseInt(str.split(':')[1],10) : 0);
+}
+
+function secondsToDurationString(seconds) {
+  return Math.floor(seconds/60)+':'+numberPad(seconds%60,2)
+}
+
+export {getHtmlQueryAsJson, getFirstParentByClassName, numberPad, forEach, durationStringToSeconds, secondsToDurationString};

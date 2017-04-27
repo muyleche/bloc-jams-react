@@ -6,14 +6,13 @@ import plyr from './../node_modules/plyr/dist/plyr';
 class PlayerBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { volume: 50, position: 0, playing: !!this.props.currentlyPlaying.title  };
+    this.state = { volume: 5, position: 0, playing: !!this.props.currentlyPlaying.title  };
   }
   handleChange = (event) => {
     let newState, classes = event.target.className;
     switch (true) {
       case(/play-pause/.test(classes)): {
         this.player.togglePlay();
-        console.log('Pressed play/pause.');
         newState = { playing: !this.state.playing };
         console.log('player ready: ',this.player.isReady());
         console.log('position: ', this.player.getCurrentTime());
@@ -22,7 +21,7 @@ class PlayerBar extends Component {
       }
       case (/volume/.test(classes)) : {
         newState = { 'volume': event.target.value };
-        this.player.setVolume(newState.volume/10);
+        this.player.setVolume(newState.volume);
         break;
       }
       case (/seek-bar/.test(classes)): {
@@ -38,12 +37,10 @@ class PlayerBar extends Component {
   }
   componentDidMount() {
     this.player = plyr.setup('.audio-player',{})[0];
-    this.player.setVolume(this.state.volume/10);
+    this.player.setVolume(this.state.volume);
   }
   render() {
-    let {title, artist, duration} = Object.assign({artist: this.props.artist},this.props.currentlyPlaying),
-        seconds = (duration ? parseInt(duration.replace(/.*:/,''),10) : 0)
-                  +(duration ? parseInt(duration.replace(/:.*/,''),10) : 0)*60;
+    let {title, artist, duration} = Object.assign({artist: this.props.artist},this.props.currentlyPlaying);
     return (
       <section className={"player-bar" + (this.props.currentlyPlaying.title  ? " active" : "")}>
         <div className="container">
@@ -57,15 +54,15 @@ class PlayerBar extends Component {
           <div className="control-group currently-playing">
             <h2 className="song-name">{title}</h2>
             <div className="seek-control">
-              <input type="range" id="seek-bar" className="seek-bar" value={this.state.position} onChange={this.handleChange} min="0" max={seconds} step="1"/>
-              <div className="current-time">{Math.floor(this.state.position/60)+':'+utils.numberPad(this.state.position%60,2)}</div>
+              <input type="range" id="seek-bar" className="seek-bar" value={this.state.position} onChange={this.handleChange} min="0" max={utils.durationStringToSeconds(duration)} step="1"/>
+              <div className="current-time">{utils.secondsToDurationString(this.state.position)}</div>
               <div className="total-time">{duration}</div>
             </div>
             <h2 className="artist-song-mobile">{`${title} - ${artist}`}</h2>
             <h3 className="artist-name">{artist}</h3>
           </div>
           <div className="control-group volume">
-            <input id="volume" type="range" className="volume" value={this.state.volume} onChange={this.handleChange} min="0" max="100" step="1" />
+            <input id="volume" type="range" className="volume" value={this.state.volume} onChange={this.handleChange} min="0" max="10" step="1" />
             <span className="ion-volume-high icon"></span>
             <div className="volume-number">
               <span>{this.state.volume}</span>
@@ -73,7 +70,7 @@ class PlayerBar extends Component {
           </div>
         </div>
         <audio className="audio-player">
-          <source src={this.props.currentlyPlaying.file && require(this.props.currentlyPlaying.file)} type={this.props.currentlyPlaying.fileType}></source>
+          <source src="./src/assets/music/01 Violin Concerto in D Minor, Op. 47_ I. Allegro Moderato.m4a" type="audio/m4a"></source>
         </audio>
       </section>
     );
