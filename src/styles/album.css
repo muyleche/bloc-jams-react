@@ -111,7 +111,7 @@ button.album-song-button {
   display: none;
   width: 28px;
   height: 28px;
-  padding: 1px 0 0 0;
+  padding: 2px 0 0 1px;
 }
 
 button.album-song-button:hover {
@@ -121,7 +121,7 @@ button.album-song-button:hover {
 
 .album-view-song-item:hover .song-item-number .album-song-button.ion-play {
   display: inline-block;
-  padding-left: 2px;
+  padding-left: 3px;
 }
 
 .album-view-song-item .song-item-number .album-song-button.ion-stop {

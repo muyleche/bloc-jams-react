@@ -4,7 +4,7 @@ import SongItem from './SongItem';
 class SongList extends Component {
   render() {
     return (
-      <table onClick={this.props.clickHandler} className="album-view-song-list">
+      <table className="album-view-song-list">
         <thead>
           <tr>
             <td className="song-item-number">#</td>
@@ -16,14 +16,14 @@ class SongList extends Component {
         <tbody>
           {this.props.songs.map((song, index) => (
             <SongItem key={index}
-                  songNumber={index+1}
-                  songIndex={index}
-                  title={song.title}
-                  duration={song.duration}
-                  playCount={song.playCount}
-                  selected={this.props.currentSong === song}
-                  playing={this.props.playing}
-                  />))}
+                      songIndex={index}
+                      title={song.title}
+                      duration={song.duration}
+                      playCount={song.playCount}
+                      selected={this.props.currentSongIndex === index}
+                      playing={this.props.playing}
+                      />)
+          )}
         </tbody>
       </table>
     );

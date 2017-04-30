@@ -8,6 +8,7 @@ class PlayerBar extends Component {
     super(props);
     this.state = { volume: 5, position: 0 };
   }
+
   playerBarPlayPause = (target = document.querySelector('.play-pause'), props = this.props) => {
     if (props.playing && this.player.isPaused()) {
       this.player.play();
@@ -20,24 +21,40 @@ class PlayerBar extends Component {
       utils.addClass('ion-play', target);
     }
   }
+
   positionUpdater = () => {
     this.setState({position: this.player.getCurrentTime()});
   }
+
   nextHandler = (event) => {
-    this.props.next();
+    this.props.changeSong(this.props.currentSongIndex+1);
   }
+
   previousHandler = (event) => {
-    this.props.previous();
+    this.props.changeSong(this.props.currentSongIndex-1);
   }
+
   seekHandler = (event) => {
-    this.player.seek(parseFloat(event.target.value));
-    this.positionUpdater();
+    this.setState({position: parseFloat(event.target.value)});
+    document.removeEventListener('timeupdate', this.positionUpdater);
+    if (this.seekTimer) {
+      clearTimeout(this.seekTimer);
+      this.seekTimer = null;
+    }
+    this.seekTimer = setTimeout(() => {
+        this.player.pause();
+        this.player.seek(this.state.position);
+        document.addEventListener('timeupdate', this.positionUpdater);
+        this.playerBarPlayPause();
+    }, 250);
   }
+
   volumeHandler = (event) => {
     let newState = { 'volume': event.target.value };
     this.player.setVolume(newState.volume);
     this.setState(newState);
   }
+
   updateCurrentSongInPlayer = (song) => {
     this.player.source({
       type: 'audio',
@@ -50,11 +67,13 @@ class PlayerBar extends Component {
     this.player.seek(0);
     this.positionUpdater();
   }
+
   componentDidMount() {
     this.player = plyr.setup('.audio-player',{})[0];
     this.player.setVolume(this.state.volume);
     document.addEventListener('timeupdate', this.positionUpdater);
   }
+
   componentWillReceiveProps(nextProps) {
     // the props are about to be updated.
     // the song just changed, upate the player.
@@ -65,13 +84,14 @@ class PlayerBar extends Component {
       this.playerBarPlayPause(undefined, nextProps);
     }
   }
+
   render() {
     let song = this.props.currentSong,
         {title, artist, duration} = Object.assign({artist: this.props.artist}, song || {});
 
     return (
       <section className={"player-bar" + (song  ? " active" : "")}>
-        <button className="close ion-close clear-style" onClick={this.props.clear}></button>
+        <button className="close ion-close clear-style" onClick={this.props.changeSong}></button>
         <div className="container">
           <div className="control-group main-controls">
             <div className="button-group">
