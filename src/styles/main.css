@@ -15,6 +15,20 @@ body {
   height: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
+button.clear-style {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+button.clear-style:focus,
+button.clear-style:active {
+  outline: none;
+}
+
 .navbar {
   position: relative;
   padding: 0.5rem;

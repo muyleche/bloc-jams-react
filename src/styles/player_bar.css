@@ -16,16 +16,14 @@
   opacity: 1;
 }
 
-.player-bar a {
+.player-bar button {
   font-size: 1.1rem;
   vertical-align: middle;
+  color: white;
 }
 
-.player-bar a,
-.player-bar a:hover {
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
+.player-bar button:hover {
+  color: darkgray;
 }
 
 .player-bar .container {
@@ -52,21 +50,6 @@
   justify-content: center;
 }
 
-.player-bar .main-controls button {
-  background: none;
-  border: none;
-  color: white;
-}
-
-.player-bar .main-controls button:focus {
-  outline: none;
-}
-
-.player-bar .main-controls button:hover {
-  color: darkgray;
-  cursor: pointer;
-}
-
 .player-bar .main-controls .previous {
   margin-right: 16.5%;
 }
@@ -74,6 +57,13 @@
 .player-bar .main-controls .play-pause {
   margin-right: 15%;
   font-size: 1.6rem;
+  width: 1.6rem;
+}
+
+.player-bar button.close {
+  position: absolute;
+  right: 0;
+  padding: 15px;
 }
 
 .player-bar .currently-playing {
@@ -146,6 +136,7 @@
 
 .player-bar .volume .icon {
   font-size: 1.1rem;
+  width: 1.1rem;
   display: inline-block;
   margin-left: 3px;
   vertical-align: middle;

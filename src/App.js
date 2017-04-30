@@ -5,10 +5,10 @@ import {
 } from 'react-router-dom';
 import './styles/main.css';
 import './styles/normalize.css';
-import NavBar from './NavBar';
-import Landing from './Landing';
-import Collection from './Collection';
-import Album from './Album';
+import NavBar from './components/NavBar';
+import Landing from './components/Landing';
+import Collection from './components/Collection';
+import Album from './components/Album';
 
 class App extends Component {
   render() {
