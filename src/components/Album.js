@@ -25,8 +25,9 @@ class Album extends Component {
   }
 
   changeSong = (index = -1) => {
-    // if you played a new song, increment playCount.
-    this.state.album.songs[index].playCount++;
+    const song = this.state.album.songs[index]
+    // if you played a valid song, increment playCount.
+    if (song) song.playCount++;
     // update currentSong and 'playing' state.
     this.setState({ currentSongIndex: index, playing: index >= 0 });
   }

@@ -124,7 +124,7 @@ class PlayerBar extends Component {
       </section>
     );
   }
-  componentWillUnMount() {
+  componentWillUnmount() {
     this.player.destroy();
     clearInterval(this.state.positionTimer);
     document.removeEventListener('timeupdate', this.positionUpdater);
