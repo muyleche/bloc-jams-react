@@ -13,6 +13,11 @@ React is a JavaScript library that provides a paradigm by which to develop compo
 
 In addition to the component model, React also operates on the principal of ['state' management](https://reactjs.org/docs/state-and-lifecycle.html). Components receive 'state' information from their inherited context and 'properties'. They can also respond dynamically as that state changes. To accomplish this, you simply need to inject the proper logic into the Component lifecycle. Managing state can take some getting used to, and requires you to make some design decisions in order to share 'state' within the right scope and in the right way.
 
+## Plyr
+In order to play audio in BlocJams React, this project includes [Plyr](https://github.com/sampotts/plyr). Plyr is a JavaScript library for media playback in web sites. It targets HTML elements and can also display audio/visual playback controls if desired. In this application, we simply rely on it for playing audio in the browser and exposing functions for various actions 'play', 'pause', 'change song', 'volume up/down', and 'seek'.
+
+It can be tricky to interact with libraries like this in React-world as they aren't necessarily designed to interact with 'state' out-of-the-box. For example, Plyr provides an event that can be listened for called 'timeupdate'. Since these events don't interact with 'state', we have to create (and remove) event listeners for 'timeupdate' at the appropriate React Component lifecycle points. Additionally, since the event listener updates as the playback position changes (which is also tied to a UI element), there's actually a sort of 'three-way binding' scenario that takes place (position slider has to update playback position, which triggers 'timeupdate', which must update the playback slider). As I mentioned, since this doesn't interact directly with the component's 'state', we have to manage that three-way tie ourselves.
+
 ## Take It For a Spin!
 To see this project in action, clone the repo locally and then run the following command:
 
