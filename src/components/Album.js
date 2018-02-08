@@ -11,6 +11,7 @@ class Album extends Component {
     this.state = { currentSongIndex: -1, album: null, playing: false };
   }
 
+  // Callback function for changing the currently selected (playing) song or toggling current song's play state.
   selectSong = (event) => {
     // only do stuff if you clicked in the album-song-button
     if (event.target.classList.contains('album-song-button')) {
@@ -24,6 +25,7 @@ class Album extends Component {
     }
   }
 
+  // If a new song is selected, play it.
   changeSong = (index = -1) => {
     // if you played a new song, increment playCount.
     if (this.state.album.songs[index]) { this.state.album.songs[index].playCount++; }
@@ -31,16 +33,19 @@ class Album extends Component {
     this.setState({ currentSongIndex: index, playing: index >= 0 });
   }
 
+  // Callback function for the play/pause button.
   playPauseHandler = () => {
     this.setState(prevState => ({ playing: !prevState.playing }));
   }
 
+  // This lifecycle function will be called when this virtual DOM is ready to be rendered. It will set the current album information according to the current props.
   componentDidMount() {
     this.setState({
       album: albumData[parseInt(this.props.match.params.id,10)]
     });
   }
 
+  // The virtual DOM to render.
   render() {
     return (
       !this.state.album ?

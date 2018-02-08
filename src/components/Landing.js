@@ -33,6 +33,7 @@ class Landing extends Component {
     );
   }
 
+  // This lifecycle function will be called when this virtual DOM is ready to be rendered.
   componentDidMount() {
     // get the point elements.
     const points = document.getElementsByClassName('point'),

@@ -9,6 +9,8 @@ class Collection extends Component {
     super(props);
     this.state = { albums: null };
   }
+
+  // This lifecycle function will be called when this virtual DOM is ready to be rendered.
   componentDidMount() {
     this.setState({
       albums: albumData

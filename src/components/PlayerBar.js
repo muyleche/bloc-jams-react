@@ -9,6 +9,7 @@ class PlayerBar extends Component {
     this.state = { volume: 5, position: 0 };
   }
 
+  // Callback function for the player bar's play/pause button.
   playerBarPlayPause = (target = document.querySelector('.play-pause'), props = this.props) => {
     if (props.playing && this.player.isPaused()) {
       this.player.play();
@@ -22,25 +23,32 @@ class PlayerBar extends Component {
     }
   }
 
+  // Callback function to update the position of the playback slider.
   positionUpdater = () => {
     this.setState({position: this.player.getCurrentTime()});
   }
 
+  // Callback function for the player bar's 'next' button.
   nextHandler = (event) => {
     this.props.changeSong(this.props.currentSongIndex+1);
   }
 
+  // Callback function for the player bar's 'previous' button.
   previousHandler = (event) => {
     this.props.changeSong(this.props.currentSongIndex-1);
   }
 
+  // Callback function for the player bar's playback position slider.
   seekHandler = (event) => {
+    // The user is manually changing the playback position. Update the plyr position accordingly.
     this.setState({position: parseFloat(event.target.value)});
+    // remove the event listener in case the user continues adjusting postion.
     document.removeEventListener('timeupdate', this.positionUpdater);
     if (this.seekTimer) {
       clearTimeout(this.seekTimer);
       this.seekTimer = null;
     }
+    // Prepare to start a new event listener for when the user stops updating position. It will take effect in 250 ms if the user is done updating postion.
     this.seekTimer = setTimeout(() => {
         this.player.pause();
         this.player.seek(this.state.position);
@@ -49,13 +57,16 @@ class PlayerBar extends Component {
     }, 250);
   }
 
+  // Callback function for the player bar's volume slider.
   volumeHandler = (event) => {
     let newState = { 'volume': event.target.value };
     this.player.setVolume(newState.volume);
     this.setState(newState);
   }
 
+  // Function that will change the currently playing song in the plyr object.
   updateCurrentSongInPlayer = (song) => {
+    // Set new song in plyr object.
     this.player.source({
       type: 'audio',
       title: song ? song.title : this.props.currentSong.title,
@@ -64,18 +75,20 @@ class PlayerBar extends Component {
         type: song ? song.fileType : this.props.currentSong.fileType
       }]
     });
+    // Start the song from the beginning.
     this.player.seek(0);
     this.positionUpdater();
   }
 
+  // This lifecycle function will be called when this virtual DOM is ready to be rendered.
   componentDidMount() {
     this.player = plyr.setup('.audio-player',{})[0];
     this.player.setVolume(this.state.volume);
     document.addEventListener('timeupdate', this.positionUpdater);
   }
 
+  // This lifecycle function will be called before applying the new 'props'. it will provide the new props so that you can perform some logic before 'props' are updated.
   componentWillReceiveProps(nextProps) {
-    // the props are about to be updated.
     // the song just changed, upate the player.
     if (nextProps.currentSong && this.props.currentSong !== nextProps.currentSong) {
       this.updateCurrentSongInPlayer(nextProps.currentSong);
@@ -124,6 +137,8 @@ class PlayerBar extends Component {
       </section>
     );
   }
+
+  // This lifecycle function will be called when this virtual DOM is ready to be cleaned up.
   componentWillUnMount() {
     this.player.destroy();
     clearInterval(this.state.positionTimer);
